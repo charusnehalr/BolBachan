@@ -1,293 +1,220 @@
 # BolBachan 🎬
 
-> **A Hinglish programming language — where code speaks your language.**
-
-BolBachan is a custom interpreted programming language that blends Hindi and English keywords into a fun, expressive syntax. Built entirely in Python with PLY, it features a handwritten lexer, parser, AST, and tree-walking interpreter. Designed for a Programming Paradigms course, it demonstrates core concepts of language design: lexical analysis, grammar specification, AST construction, and runtime evaluation.
+> A programming language that speaks Hinglish — because why should code only speak English?
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![PLY](https://img.shields.io/badge/PLY-3.11-green.svg)](https://github.com/dabeaz/ply)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![SER502](https://img.shields.io/badge/ASU-SER502%20Project-8C1D40.svg)](https://engineering.asu.edu)
 
 ---
 
-## What makes BolBachan unique?
+## What it does
 
-- **Hinglish keywords** — `rakho` (assign), `bolBhai` (print), `agar` (if), `jodo` (add), `wapis` (return)
-- **Full interpreter pipeline** — lexer → parser → AST → tree-walker, all from scratch
-- **Formally specified grammar** — EBNF grammar document included
-- **Imperative + Procedural** — variables, loops, conditionals, user-defined functions, recursion
-- **Interactive REPL** — live code execution with `.ast` toggle and state reset
-- **Helpful errors** — clear error messages with line numbers and suggestions
-- **Zero extra dependencies** — just Python 3.8+ and one library (PLY)
+BolBachan is a fully interpreted programming language built from scratch for **SER502 — Programming Paradigms at Arizona State University**. It uses **Hinglish keywords** (Hindi + English) so that code reads more like how South Asian developers naturally think and speak. You write `rakho x = 5` instead of `let x = 5`, `bolBhai(x)` instead of `print(x)`, and `agar` / `nahiToh` instead of `if` / `else`.
+
+Under the hood it implements a complete language pipeline: **lexer → parser → AST → tree-walking interpreter**, all written in Python without any language framework shortcuts.
 
 ---
 
-## Quick Start
+## Tech Stack
 
+- **Python 3.8+** — interpreter runtime
+- **PLY (Python Lex-Yacc)** — lexer and LALR(1) parser
+- **Streamlit** — interactive web playground
+- **pytest** — test suite (91 tests)
+
+---
+
+## Features
+
+- **Hinglish syntax** — `rakho`, `bolBhai`, `agar`, `jodo`, `wapis` and more
+- **Full interpreter pipeline** — lexer, parser, AST, and tree-walker built from scratch
+- **Variables & types** — int, float, string, bool (`sahi`/`galat`)
+- **Arithmetic** — `jodo` (+), `ghatao` (−), `guna` (×), `bhaag` (÷) with correct precedence
+- **Conditionals** — `agar/toh/nahiToh` (if/then/else) + ternary `? :`
+- **Loops** — `baarBaar` (for) and `jabTak` (while)
+- **Functions** — user-defined with parameters, return via `wapis`, full recursion
+- **String concatenation** — same `jodo` operator works for strings too
+- **Comments** — `//` line comments
+- **Interactive REPL** — live code execution in the terminal
+- **Web Playground** — browser UI with examples, output panel, and AST viewer
+- **Helpful errors** — clear messages with suggestions when things go wrong
+- **Formal grammar** — EBNF specification documented in `docs/grammar.md`
+
+---
+
+## Demo / Screenshots
+
+> **Web Playground**
+
+<!-- Add screenshot of the Streamlit playground here -->
+<!-- Suggested: screenshot of app.py running with FizzBuzz example -->
+![BolBachan Playground](docs/images/playground.png)
+
+> **Terminal REPL**
+
+<!-- Add screenshot of the REPL session here -->
+![BolBachan REPL](docs/images/repl.png)
+
+> **Sample Output — Fibonacci**
+
+<!-- Add screenshot of fibonacci.bb output here -->
+![Fibonacci Output](docs/images/fibonacci.png)
+
+---
+
+## How to Run
+
+**Clone and install:**
 ```bash
-# 1. Clone and install
 git clone https://github.com/YOUR_USERNAME/BolBachan.git
 cd BolBachan
 pip install -r requirements.txt
+```
 
-# 2. Run a program
+**Run a program:**
+```bash
 python main.py examples/hello_world.bb
+python main.py examples/fibonacci.bb
+python main.py examples/fizzbuzz.bb
+```
 
-# 3. Start the interactive REPL
+**Start the web playground:**
+```bash
+streamlit run app.py
+# Open http://localhost:8501
+```
+
+**Start the interactive REPL:**
+```bash
 python main.py
+```
 
-# 4. Show the AST for a program
-python main.py examples/fibonacci.bb --ast
+**Run the test suite:**
+```bash
+pip install pytest
+pytest tests/ -v      # 91 tests
+```
+
+**Other CLI options:**
+```bash
+python main.py program.bb --ast        # show parse tree
+python main.py program.bb --parse-only # parse without running
+python main.py --version
 ```
 
 ---
 
-## Your First BolBachan Program
+## Write Your First BolBachan Program
 
 ```
 // hello.bb
+
 rakho name = "Duniya";
 bolBhai("Namaste, " jodo name jodo "!");
 
-baarBaar (rakho i = 1; i chhotaHai 6; i = i jodo 1) {
-    bolBhai("Counting: " jodo i);
+function factorial(n) {
+    agar (n chhotaHai 2) toh {
+        wapis 1;
+    }
+    wapis n guna factorial(n ghatao 1);
 }
 
-function greet(who) {
-    wapis "BolBachan kehta hai: Namaste, " jodo who jodo "!";
-}
-
-bolBhai(greet("World"));
+bolBhai("5! = " jodo factorial(5));
 ```
 
 Output:
 ```
 Namaste, Duniya!
-Counting: 1
-Counting: 2
-Counting: 3
-Counting: 4
-Counting: 5
-BolBachan kehta hai: Namaste, World!
+5! = 120
 ```
 
 ---
 
-## Language at a Glance
+## Keyword Reference
 
-| Feature | BolBachan Syntax | Equivalent |
-|---------|-----------------|---------|
-| Assign | `rakho x = 5;` | `x = 5` |
-| Print | `bolBhai(x);` | `print(x)` |
-| If-else | `agar (c) toh {...} nahiToh {...}` | `if c: ... else: ...` |
-| While | `jabTak (c) {...}` | `while c: ...` |
-| For | `baarBaar (rakho i=0; i chhotaHai 5; i=i jodo 1) {...}` | `for i in range(5):` |
-| Function | `function add(a, b) { wapis a jodo b; }` | `def add(a,b): return a+b` |
-| Add | `a jodo b` | `a + b` |
-| Subtract | `a ghatao b` | `a - b` |
-| Multiply | `a guna b` | `a * b` |
-| Divide | `a bhaag b` | `a // b` |
-| Greater | `a badaHai b` | `a > b` |
-| Less | `a chhotaHai b` | `a < b` |
-| Equal | `a barabarHai b` | `a == b` |
-| Not Equal | `a naBrabar b` | `a != b` |
-| AND | `a & b` | `a and b` |
-| OR | `a \| b` | `a or b` |
-| NOT | `!a` | `not a` |
-| Ternary | `cond ? x : y` | `x if cond else y` |
-| String join | `"Hi " jodo name` | `"Hi " + name` |
-| Comment | `// text` | `# text` |
-
----
-
-## Keyword Dictionary
-
-| Hinglish | Meaning |
-|----------|---------|
-| `rakho` | keep / assign |
-| `bolBhai` | say, brother / print |
-| `agar` | if |
-| `toh` | then |
-| `nahiToh` | otherwise / else |
-| `jabTak` | as long as / while |
-| `baarBaar` | again and again / for |
-| `jodo` | add / join |
-| `ghatao` | subtract |
-| `guna` | multiply |
-| `bhaag` | divide |
-| `badaHai` | is greater than |
-| `chhotaHai` | is less than |
-| `barabarHai` | is equal to |
-| `naBrabar` | is not equal to |
-| `wapis` | back / return |
-| `sahi` | correct / true |
-| `galat` | wrong / false |
-| `khaali` | empty / null |
-
----
-
-## Examples
-
-The `examples/` directory contains ready-to-run programs:
-
-| File | What it shows |
-|------|--------------|
-| `hello_world.bb` | Basic output |
-| `arithmetic.bb` | All math operators + string concatenation |
-| `conditions.bb` | if/else, ternary, logical operators |
-| `loops.bb` | for and while loops |
-| `functions.bb` | User-defined functions + recursion |
-| `fibonacci.bb` | Fibonacci via recursion and iteration |
-| `fizzbuzz.bb` | Classic FizzBuzz problem |
-
----
-
-## Project Structure
-
-```
-BolBachan/
-├── main.py                    ← CLI entry point + REPL
-├── src/
-│   └── bolbachan/
-│       ├── __init__.py        ← Public API: run_file(), run_string(), parse()
-│       ├── lexer.py           ← PLY lexer — tokenizes .bb source
-│       ├── parser.py          ← PLY parser — builds AST from token stream
-│       ├── interpreter.py     ← Tree-walking interpreter — evaluates AST
-│       └── errors.py          ← Exception hierarchy
-├── examples/                  ← Ready-to-run .bb programs
-├── tests/                     ← pytest test suite
-│   ├── test_lexer.py
-│   └── test_interpreter.py
-├── docs/
-│   ├── grammar.md             ← Formal EBNF grammar specification
-│   └── language-reference.md ← Complete language reference
-├── data/                      ← Original sample programs (course submission)
-├── doc/                       ← Original course documentation & grammar PDF
-├── requirements.txt
-├── CONTRIBUTING.md
-├── ROADMAP.md
-└── CHANGELOG.md
-```
+| BolBachan | Meaning | English equivalent |
+|-----------|---------|-------------------|
+| `rakho` | keep / store | `let` / `=` |
+| `bolBhai` | say, brother! | `print()` |
+| `agar` / `toh` | if / then | `if` |
+| `nahiToh` | otherwise | `else` |
+| `jabTak` | as long as | `while` |
+| `baarBaar` | again and again | `for` |
+| `jodo` | add / join | `+` |
+| `ghatao` | subtract | `-` |
+| `guna` | multiply | `*` |
+| `bhaag` | divide | `//` |
+| `badaHai` | is greater than | `>` |
+| `chhotaHai` | is less than | `<` |
+| `barabarHai` | is equal to | `==` |
+| `naBrabar` | is not equal to | `!=` |
+| `wapis` | go back / return | `return` |
+| `sahi` / `galat` | correct / wrong | `true` / `false` |
 
 ---
 
 ## Architecture
 
 ```
-Source (.bb file)
-       │
-       ▼
-  ┌──────────┐  token stream  ┌──────────┐  AST tuples  ┌───────────────┐
-  │  Lexer   │ ─────────────▶ │  Parser  │ ────────────▶ │  Interpreter  │
-  │ lexer.py │                │ parser.py│               │interpreter.py │
-  └──────────┘                └──────────┘               └───────────────┘
-    PLY lex                   PLY yacc                     Tree-walker
+Source (.bb)
+    │
+    ▼
+[ Lexer ]  ──token stream──▶  [ Parser ]  ──AST tuples──▶  [ Interpreter ]
+ lexer.py                      parser.py                    interpreter.py
+ PLY lex                       PLY yacc / LALR(1)           Tree-walker
 ```
 
-AST nodes are plain Python tuples. Example:
-
+AST nodes are plain Python tuples — simple, inspectable, no magic:
 ```python
-# Source:  rakho x = 3 jodo 4;
-# AST:
+# rakho x = 3 jodo 4;
 ('program', [
     ('assign', 'x',
-        ('binary_op', 'jodo',
-            ('number', 3),
-            ('number', 4)))
+        ('binary_op', 'jodo', ('number', 3), ('number', 4)))
 ])
 ```
 
----
-
-## Running Tests
-
-```bash
-pip install pytest
-pytest tests/ -v
+**Project structure:**
+```
+BolBachan/
+├── main.py              ← CLI + REPL
+├── app.py               ← Streamlit web playground
+├── src/bolbachan/
+│   ├── lexer.py         ← Tokenizer
+│   ├── parser.py        ← Grammar + AST builder
+│   ├── interpreter.py   ← Tree-walking evaluator
+│   └── errors.py        ← Error hierarchy
+├── examples/            ← 7 sample programs
+├── tests/               ← 91 pytest tests
+└── docs/                ← Grammar spec + language reference
 ```
 
 ---
 
-## Interactive REPL
+## Why We Built This
 
-```
-$ python main.py
+This started as a simple question our team had during SER502: **what if a programming language used the way bilingual people actually think?**
 
-  ╔══════════════════════════════════════╗
-  ║   BolBachan v1.0.0 — Hinglish REPL  ║
-  ║   Type 'chhodo' or Ctrl-D to exit   ║
-  ╚══════════════════════════════════════╝
+Most developers who grew up speaking Hindi, Urdu, or other South Asian languages mentally translate between their native language and English while coding. We wanted to see what it felt like to remove that translation step — not by replacing English entirely, but by blending the two the way people naturally speak: Hinglish.
 
-bolbachan> rakho x = 42;
-bolbachan> bolBhai("Answer: " jodo x);
-Answer: 42
-bolbachan> .ast
-AST display ON
-bolbachan> rakho y = 2 jodo 3;
-── AST ──
-(program
-  (assign
-    'y'
-    (binary_op
-      'jodo'
-      (number
-        2)
-      (number
-        3))))
-─────────
-bolbachan> chhodo
-Alvida!
-```
+**The tradeoffs we made:**
+
+- We chose a **tree-walking interpreter** over bytecode compilation — it is slower but the AST stays visible and inspectable, which is better for a teaching language where understanding the execution model matters.
+- We used **PLY (Python Lex-Yacc)** over writing a hand-rolled parser — this let us define the grammar formally in EBNF style and forced us to think carefully about operator precedence, shift/reduce conflicts, and ambiguity.
+- `jodo` (add) **doubles as string concatenation** — same operator, different behavior based on types. This was a deliberate design choice to keep the keyword count low and let the language feel lightweight.
+- We chose **keyword-based operators** (`jodo`, `ghatao`) over symbols (`+`, `-`) for arithmetic — this makes the language feel distinctly non-English even though the structure is familiar.
+
+**What we learned:**
+
+Building a language from scratch — even a simple one — forces you to make decisions that textbooks hand you for free. Operator precedence, scope rules, function hoisting, how errors surface to the user — every one of these required a concrete choice and exposed us to exactly the tradeoffs real language designers face.
 
 ---
 
-## CLI Reference
+## Team — SER502 Group 32, ASU
 
-```
-python main.py                        # Start REPL
-python main.py <file.bb>              # Run a file
-python main.py <file.bb> --ast        # Print AST, then run
-python main.py <file.bb> --parse-only # Parse only, no execution
-python main.py --version              # Print version
-```
-
----
-
-## Using as a Library
-
-```python
-import sys
-sys.path.insert(0, "src")
-
-from bolbachan import run_file, run_string, parse
-
-run_file("examples/hello_world.bb")        # run a file
-run_string('bolBhai("Namaste!");')          # run a string
-ast = parse("rakho x = 1 jodo 2;")         # get AST
-```
-
----
-
-## Roadmap
-
-See [ROADMAP.md](ROADMAP.md) for the full plan.
-
-**Next up:** modulo operator · `else-if` chains · string escape sequences · web playground
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). PRs, bug reports, and language design suggestions are all welcome.
-
----
-
-## Team
-
-Created by **Team 32** for **SER502 — Programming Paradigms** at Arizona State University.
-
-| Member | Contribution |
-|--------|-------------|
+| Member | Role |
+|--------|------|
 | Aditya Soude | Parser design & implementation |
 | Savankumar Pethani | Grammar design |
 | Vidhisha Amle | Lexer implementation |
@@ -297,8 +224,8 @@ Created by **Team 32** for **SER502 — Programming Paradigms** at Arizona State
 
 ## License
 
-[MIT](LICENSE) — free to use, modify, and distribute.
+[MIT](LICENSE) — free to use, learn from, and build on.
 
 ---
 
-📺 [Demo Video](https://youtu.be/Eu3Vn_AxoQg) · 📖 [Language Reference](docs/language-reference.md) · 📐 [Grammar Spec](docs/grammar.md)
+[Demo Video](https://youtu.be/Eu3Vn_AxoQg) · [Language Reference](docs/language-reference.md) · [Grammar Spec](docs/grammar.md) ·[Examples](examples/)
