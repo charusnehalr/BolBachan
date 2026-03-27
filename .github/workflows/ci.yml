@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.10", "3.12"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+
+      - name: Run example programs (smoke test)
+        run: |
+          python main.py examples/hello_world.bb
+          python main.py examples/arithmetic.bb
+          python main.py examples/conditions.bb
+          python main.py examples/loops.bb
+          python main.py examples/functions.bb
+          python main.py examples/fibonacci.bb
+          python main.py examples/fizzbuzz.bb
+
+      - name: Check --version flag
+        run: python main.py --version
+
+      - name: Check --parse-only flag
+        run: python main.py examples/hello_world.bb --parse-only

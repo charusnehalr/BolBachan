@@ -1,0 +1,60 @@
+SER 502 Contribution - Team 32
+
+Team Members:
+
+1. Aditya Soude (ASU ID- 1233364979)
+2. Savankumar Pethani (ASU ID- 1233436310)
+3. Vidhisha Amle (ASU ID- 1233138272)
+4. Charu Sneha Laguduva Ravi (ASU ID-1233592505)
+
+Milestone 1:
+
+The entire team collaborated equally on setting up the private GitHub repository, and drafting the initial project plan. We worked together on creating the README.md, including the language description, supported systems,
+and tools to be used.
+
+Milestone 2: 
+
+Proposed Plan: 
+
+1. Aditya Soude- Implementation of parser
+2. Savankumar Pethani -  Grammar design
+3. Vidhisha Amle - Implementation of lexical analyzer
+4. Charu Sneha - Runtime execution and testing of sample programs
+
+Savankumar Pethani
+1) Created the whole grammar with team.
+2) Decided on its major design and grammar rules.
+
+Vidhisha Amle
+1) Designed and implementated the lexical analyzer using PLY with the team.
+2) Defined token rules, reserved keywords, and handled pattern matching for identifiers, literals, and operators.
+
+Aditya Deepak Soude
+1) Contributed creating grammar.
+2) Designed a parser that can take tokens from lexer and accomadate all apropriated grammar rules.
+
+Charu Sneha Laguduva Ravi
+1) Implemented the main parser entry point, enabled parse tree generation, and created a comprehensive sample input to validate all language features with the team.
+2) Assisted in designing and implementing the lexical analyzer and parser.
+
+Milestone 3: 
+
+Savankumar Pethani
+1) Contributed to brainstorming and implementing interpreter.py as part of the team. Also updated the grammar to align with the interpreter's functionality
+2) Thoroughly tested the entire project using custom sample cases to validate functionality.
+
+Vidhisha Amle
+1) Collaborated on the design and implementation of interpreter.py. Also improved and updated related files for full integration.
+2) Independently validated the complete project using custom test cases for accuracy.
+
+Aditya Deepak Soud
+1) Participated in brainstorming and building interpreter.py. Refined supporting files to ensure smooth functionality.
+2) Designed and executed comprehensive tests with self-created examples to ensure project reliability.
+
+Charu Sneha Laguduva Ravi
+1) Helped develop interpreter.py from planning to implementation. Modified connected files to maintain consistency.
+2) Performed end-to-end testing with original sample inputs to confirm correct behavior across components.
+
+Milestone 4:
+
+The entire team collaborated equally in creating the project presentation. All group members were present during the final project demonstration.
