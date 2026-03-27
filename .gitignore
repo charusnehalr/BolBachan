@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# PLY generated files (parser tables — regenerated automatically)
+src/bolbachan/parser.out
+src/bolbachan/parsetab.py
+parsetab.py
+parser.out
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+*.coveragexml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
