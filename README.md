@@ -48,19 +48,13 @@ Under the hood it implements a complete language pipeline: **lexer → parser �
 
 > **Web Playground**
 
-<!-- Add screenshot of the Streamlit playground here -->
-<!-- Suggested: screenshot of app.py running with FizzBuzz example -->
-![BolBachan Playground](docs/images/playground.png)
+<img width="1837" height="907" alt="image" src="https://github.com/user-attachments/assets/2099c10c-5387-4a80-abb8-827c694c2a64" />
 
-> **Terminal REPL**
+<img width="1831" height="909" alt="image" src="https://github.com/user-attachments/assets/26c47f80-1fda-4517-84c6-1586c7287c9c" />
 
-<!-- Add screenshot of the REPL session here -->
-![BolBachan REPL](docs/images/repl.png)
+<img width="1840" height="902" alt="image" src="https://github.com/user-attachments/assets/4c61ae45-c61d-487f-a042-9fcca132f0cb" />
 
-> **Sample Output — Fibonacci**
-
-<!-- Add screenshot of fibonacci.bb output here -->
-![Fibonacci Output](docs/images/fibonacci.png)
+<img width="1815" height="853" alt="image" src="https://github.com/user-attachments/assets/cbdc707b-73ed-45f8-8568-f1d1f2632f4f" />
 
 ---
 
