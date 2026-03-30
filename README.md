@@ -1,6 +1,6 @@
 # BolBachan 🎬
 
-> A programming language that speaks Hinglish  -  because why should code only speak English?
+> A programming language that speaks Hinglish - because why should code only speak English?
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![PLY](https://img.shields.io/badge/PLY-3.11-green.svg)](https://github.com/dabeaz/ply)
